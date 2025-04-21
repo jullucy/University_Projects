@@ -194,5 +194,3 @@ curl -H "Authorization: Token your_token_here" http://localhost:8000/api/routes/
 - All endpoints are protected — only authenticated users can view and modify their own data.
   
 ---
-
-📚 Built with Django REST Framework.
