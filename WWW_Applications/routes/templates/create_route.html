@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Route</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+</head>
+<body>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}" class="nav-btn">Home</a></li>
+            <li><a href="{% url 'my_routes' %}" class="nav-btn">My Routes</a></li>
+            <li><a href="{% url 'logout' %}" class="nav-btn">Log Out</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <h2>Create a Route</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label for="name">Route Name:</label>
+            <input type="text" name="name" id="name" required />
+
+            <label for="background">Choose Background Image:</label>
+            <select name="background" id="background-select" required>
+                {% for background in backgrounds %}
+                    <option value="{{ background.id }}" data-img-url="{{ background.image.url }}">
+                        {{ background.name }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <div id="preview-container">
+                <img id="background-preview" src="" alt="Selected background preview" />
+            </div>
+
+            <button type="submit">Create Route</button>
+        </form>
+    </main>
+
+    <script>
+        const select = document.getElementById("background-select");
+        const preview = document.getElementById("background-preview");
+
+        function updatePreview() {
+            const selectedOption = select.options[select.selectedIndex];
+            const imageUrl = selectedOption.getAttribute("data-img-url");
+
+            if (imageUrl) {
+                preview.src = imageUrl;
+                preview.style.display = "block";
+            } else {
+                preview.style.display = "none";
+            }
+        }
+
+        select.addEventListener("change", updatePreview);
+        updatePreview();
+    </script>
+</body>
+</html>
