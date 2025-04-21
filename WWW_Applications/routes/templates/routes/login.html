@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}" class="nav-btn">Home</a></li>
+            <li><a href="{% url 'register' %}" class="nav-btn">Register</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Welcome back!</h2>
+        <h3>Please log in to continue.</h3>
+
+        <form method="POST">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            {{ form.username }}
+
+            <label for="password">Password:</label>
+            {{ form.password }}
+
+            <button type="submit">Log in</button>
+        </form>
+
+        <p>Don't have an account? <a href="{% url 'register' %}">Register here</a>.</p>
+    </div>
+</body>
+</html>

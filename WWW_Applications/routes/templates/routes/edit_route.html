@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="csrf-token" content="{{ csrf_token }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Route</title>
+
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <script src="{% static 'script.js' %}"></script>
+</head>
+<body>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}" class="nav-btn">Home</a></li>
+            <li><a href="{% url 'my_routes' %}" class="nav-btn">My Routes</a></li>
+            <li><a href="{% url 'logout' %}" class="nav-btn">Log Out</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <h2>Edit Route: {{ route.name }}</h2>
+
+        <section>
+            <h3>Route Points</h3>
+            <ul id="route-points-list">
+                {% for point in points %}
+                    <li>
+                        <span>({{ point.x }}, {{ point.y }})</span>
+                        <form action="{% url 'remove_point' point.id %}" method="post" class="inline-form">
+                            {% csrf_token %}
+                            <button type="submit" class="delete-btn">Delete</button>
+                        </form>
+                    </li>
+                {% empty %}
+                    <p>No points have been added to this route. Add the first point!</p>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section id="preview-container" data-route-id="{{ route.id }}">
+            <img
+                id="background-preview"
+                src="{{ route.background.image.url }}"
+                alt="Selected background preview"
+                style="cursor: crosshair;"
+            />
+        </section>
+
+        <p><a href="{% url 'my_routes' %}">Back to Your Routes</a></p>
+    </main>
+
+    <div id="points-data" style="display: none;">{{ points_json }}</div>
+</body>
+</html>

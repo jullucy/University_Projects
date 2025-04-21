@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Routes</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+</head>
+<body>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}" class="nav-btn">Home</a></li>
+            <li><a href="{% url 'create_route' %}" class="nav-btn">Create a new route</a></li>
+            <li><a href="{% url 'logout' %}" class="nav-btn">Log Out</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>My Routes</h2>
+
+        <ul>
+            {% for route in routes %}
+                <li>
+                    <a href="{% url 'edit_route' route.id %}">{{ route.name }}</a>
+                    <form action="{% url 'remove_route' route.id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+
+        {% if routes.count == 0 %}
+            <p>You don't have any routes yet. <a href="{% url 'create_route' %}">Create your first route!</a></p>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Add point</title>
+</head>
+<body>
+    <h2>Add point to the route: {{ route.name }}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="x">Coordinate X:</label>
+        <input type="number" name="x" step="0.01" required><br><br>
+
+        <label for="y">Coordinate Y:</label>
+        <input type="number" name="y" step="0.01" required><br><br>
+
+        <button type="submit">Add</button>
+    </form>
+
+    <br>
+    <a href="{% url 'edit_route' route.id %}">Back to route editing</a>
+</body>
+</html>
