@@ -6,9 +6,7 @@ You can create, view, and delete routes, as well as add, retrieve, or delete ind
 
 > All endpoints require Token Authentication.  
 > Pass your token in the `Authorization` header:
-> ```
-Authorization: Token your_token_here
-```
+> ```Authorization: Token your_token_here```
 
 ---
 
