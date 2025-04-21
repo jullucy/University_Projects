@@ -1,0 +1,163 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #eef2f7;
+    color: #2c3e50;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.container:hover {
+    transform: scale(1.02);
+}
+
+/* Typography */
+h1, h2 {
+    color: #34495e;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+p {
+    color: #7f8c8d;
+}
+
+/* Buttons */
+.btn {
+    background-color: #3498db;
+    color: white;
+    padding: 12px 18px;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-right: 10px;
+    display: inline-block;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-secondary {
+    background-color: #95a5a6;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Lists */
+.route-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.route-list li {
+    padding: 15px 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.route-list li:last-child {
+    border-bottom: none;
+}
+
+.route-list li:hover {
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+/* Navigation layout */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    margin: 0;
+    background-color: #f5f5f5;
+    justify-content: center;
+}
+
+/* Navigation buttons */
+.nav-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    font-weight: 600;
+    color: #fff;
+    background-color: #3498db;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.nav-btn:hover {
+    background-color: #2980b9;
+}
+
+/* Image Preview */
+#background-preview {
+    max-width: 100%;
+    max-height: 400px;
+    display: block;
+    margin-top: 10px;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    object-fit: contain;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Point Markers */
+.point-marker {
+    width: 12px;
+    height: 12px;
+    background-color: #e74c3c;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.point-marker:hover {
+    background-color: #c0392b;
+}
+
+/* Preview Container */
+#preview-container {
+    position: relative;
+    margin: 20px auto;
+    max-width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    color: #95a5a6;
+    font-size: 0.9em;
+}
+
+footer a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
