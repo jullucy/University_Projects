@@ -66,13 +66,13 @@ The simulation follows **Object-Oriented Design** principles with clear separati
 - **Stops**: Network nodes with capacity limits and passenger queues
 - **Routes**: Paths between stops with timing information
 
-### 👥 Passenger System
+### Passenger System
 - **Passenger Generation**: Random passenger creation with home stops
 - **Destination Assignment**: Dynamic destination selection
 - **Boarding Logic**: Capacity-aware passenger boarding
 - **Journey Tracking**: Complete trip monitoring and statistics
 
-### ⏰ Event Management
+### Event Management
 - **Event Queue**: Priority-based event scheduling
 - **Event Types**:
   - `TramOnStop`: Tram arrival at station
@@ -278,5 +278,3 @@ This project demonstrates key Computer Science concepts:
 **Institution**: University of Warsaw (MIMUW)  
 **Language**: Java  
 **Paradigm**: Event-Driven Simulation
-
-*This simulation provides a realistic model of urban transportation systems, suitable for analyzing passenger flow, optimizing routes, and understanding system performance under various conditions.*

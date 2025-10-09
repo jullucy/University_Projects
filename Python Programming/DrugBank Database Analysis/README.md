@@ -328,5 +328,3 @@ This project demonstrates key concepts in:
 **Author**: Julia Łucyn  
 **Language**: Python 3.8+  
 **Domain**: Bioinformatics & Pharmaceutical Data Analysis
-
-*This project provides a comprehensive toolkit for pharmaceutical data analysis, demonstrating the integration of data science techniques with domain-specific knowledge in drug discovery and development.*
