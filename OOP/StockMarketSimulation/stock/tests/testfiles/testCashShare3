@@ -1,0 +1,6 @@
+# mamy 5 inwestorów: 2x RANDOM, 3x SMA
+R R S S S
+# 2 rodzaje akcji w obrocie wraz z cenami ostatnich transakcji
+IBM:140 ORCL:80
+# początkowy stan portfeli (identyczny dla wszystkich inwestorów)
+80000 IBM:20 ORCL:50

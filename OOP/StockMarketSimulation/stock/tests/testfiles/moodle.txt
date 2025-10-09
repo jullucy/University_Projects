@@ -1,0 +1,5 @@
+R R R R S S
+# 3 rodzaje akcji w obrocie wraz z cenami ostatnich transakcji
+APL:145 MSFT:300 GOOGL:2700
+# początkowy stan portfeli (identyczny dla wszystkich inwestorów)
+100000 APL:5 MSFT:15 GOOGL:3

@@ -1,0 +1,6 @@
+# mamy 4 inwestorów: 2x RANDOM, 2x SMA
+S S S S
+# 6 rodzaje akcji w obrocie wraz z cenami ostatnich transakcji
+AAPL:155 MSFT:305 GOOGL:2705 AMZN:3490 TSLA:720 FB:345
+# początkowy stan portfeli (identyczny dla wszystkich inwestorów)
+180000 AAPL:12 MSFT:18 GOOGL:6 AMZN:4 TSLA:10 FB:7

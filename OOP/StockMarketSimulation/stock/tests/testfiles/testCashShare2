@@ -1,0 +1,6 @@
+# mamy 8 inwestorów: 8x RANDOM
+R R R R R R R R
+# 3 rodzaje akcji w obrocie wraz z cenami ostatnich transakcji
+TSLA:700 FB:350 NFLX:550
+# początkowy stan portfeli (identyczny dla wszystkich inwestorów)
+150000 TSLA:8 FB:10 NFLX:12

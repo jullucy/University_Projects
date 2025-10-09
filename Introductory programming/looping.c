@@ -1,17 +1,17 @@
 /**
- * "Pętlik"
+ * "Looping"
  *
- * Program zaliczeniowy na zajęcia ze Wstępu do programowania.
+ * Credit program for "Introduction to Programming" classes.
  *
- * Kompilacja poleceniem:
+ * Compilation command:
  *
- * gcc @opcje pentlik.c -o petlik
+ * gcc @options looping.c -o looping
  *
- * Program umożliwia realizajcję języka Pętlik.
+ * Program enables implementation of Looper language.
  *
- * Czyta i wykonuje polecenie:
- * wypisania wartości zmiennej;
- * wykonania programu w języku Pętlik.
+ * Reads and executes commands:
+ * printing variable values;
+ * executing programs in Looping language.
  */
 
 
@@ -21,194 +21,194 @@
 #include <stdlib.h>
 
 
-/* manipulacje tablicami */
+/* array manipulations */
 
 /**
- * Tworzy tablicę zmiennych.
+ * Creates array of variables.
  */
-int **stworz_tablice(void) {
-  int **tab;
-  tab = (int**) malloc(26 * sizeof(int*));
+int **create_array(void) {
+  int **arr;
+  arr = (int**) malloc(26 * sizeof(int*));
   for (int i = 0; i < 26; ++i) {
-    tab[i] = (int*) calloc(3, sizeof(int));
+    arr[i] = (int*) calloc(3, sizeof(int));
   }
-  return tab;
+  return arr;
 }
 
 /**
- * Tworzy tablicę rozmiarów.
+ * Creates array of sizes.
  */
-int *tab_rozmiarow(void) {
-  int *tab_r;
-  tab_r = (int*) malloc(26 * sizeof(int));
+int *create_sizes_array(void) {
+  int *sizes_arr;
+  sizes_arr = (int*) malloc(26 * sizeof(int));
   for (int i = 0; i < 26; ++i) {
-    tab_r[i] = 3;
+    sizes_arr[i] = 3;
   }
-  return tab_r;
+  return sizes_arr;
 }
 
 /**
- * Zwalnia pamięć zaalokowaną na tablicę 'tab'.
+ * Frees memory allocated for array 'arr'.
  */
-void free_tab(int **tab) {
+void free_array(int **arr) {
   for (int i = 0; i < 26; ++i) {
-    free(tab[i]);
+    free(arr[i]);
   }
-  free(tab);
+  free(arr);
 }
 
 /**
- * O ile jest to możliwe zwiększa dwukrotnie wielkość tablicy.
+ * Doubles the size of the array if possible.
  *
- * Jeśli nie jest to możliwe zmienia wiekość tablicy na INT_MAX.
+ * If not possible, changes the array size to INT_MAX.
  */
-void zwieksz(char **tab, int *size) {
-  int pom = *size;
+void expand(char **arr, int *size) {
+  int temp = *size;
   if (2 * (*size) < INT_MAX) {
     *size = 2 * (*size);
   }
   else {
     *size = INT_MAX;
   }
-  *tab = (char*) realloc (*tab, (unsigned int) *size * sizeof(char));
-  while (pom < *size) {
-    (*tab)[pom] = 0;
-    ++pom;
+  *arr = (char*) realloc (*arr, (unsigned int) *size * sizeof(char));
+  while (temp < *size) {
+    (*arr)[temp] = 0;
+    ++temp;
   }
 }
 
 /**
- * Zwiększa o jeden wielkość tablicy 'tab'.
+ * Increases the size of array 'arr' by one.
  */
-void zwieksz_o_jeden(int **tab, int *size) {
+void expand_by_one(int **arr, int *size) {
   *size = *size + 1;
-  *tab = (int*) realloc (*tab, (unsigned int) *size * sizeof(int));
-  (*tab)[*size - 1] = 0;
+  *arr = (int*) realloc (*arr, (unsigned int) *size * sizeof(int));
+  (*arr)[*size - 1] = 0;
 }
 
 /**
- * Zmienia wielkość tablicy 'tab' z 'size' na 'size_2'.
+ * Changes the size of array 'arr' from 'size' to 'new_size'.
  */
-void zmien_rozmiar(int **tab, int *size, int size_2) {
-  int pom = *size;
-  *tab = (int*) realloc (*tab, (unsigned int) size_2 * sizeof(int));
-  while (pom < size_2) {
-    (*tab)[pom] = 0;
-    ++pom;
+void resize_array(int **arr, int *size, int new_size) {
+  int temp = *size;
+  *arr = (int*) realloc (*arr, (unsigned int) new_size * sizeof(int));
+  while (temp < new_size) {
+    (*arr)[temp] = 0;
+    ++temp;
   }
-  *size = size_2;
+  *size = new_size;
 }
 
 
-/* działania na zmiennych */
+/* variable operations */
 
 /**
- * Dodaje jeden do zmiennej zapisanej w tablicy 'zmienna'.
+ * Adds one to the variable stored in array 'variable'.
  *
- * 'size' to wielkość tablicy 'zmienna'.
+ * 'size' is the size of array 'variable'.
  */
-void dodanie_jeden(int **zmienna, int *size) {
+void add_one(int **variable, int *size) {
   int i = 0;
-  int dodatek = 1;
-  while (dodatek != 0) {
+  int carry = 1;
+  while (carry != 0) {
     if (i == *size) {
-      zwieksz_o_jeden(zmienna, size);
+      expand_by_one(variable, size);
     }
-    (*zmienna)[i] = (*zmienna)[i] + 1;
-    dodatek = 0;
-    if ((*zmienna)[i] == 10) {
-      (*zmienna)[i] = 0;
-      dodatek = 1;
+    (*variable)[i] = (*variable)[i] + 1;
+    carry = 0;
+    if ((*variable)[i] == 10) {
+      (*variable)[i] = 0;
+      carry = 1;
     }
     ++i;
   }
 }
 
 /**
- * Przekazuje odpowiednią zmienną do funkcji 'dodanie_jeden'.
+ * Passes the appropriate variable to function 'add_one'.
  */
-int dodawanie(int ***zmienne, int **ile, char **polecenie, int i) {
-  char zmienna = (*polecenie)[i];
+int add_operation(int ***variables, int **sizes, char **command, int i) {
+  char variable = (*command)[i];
   ++i;
-  int ktora = zmienna - 'a';
-  dodanie_jeden(&(*zmienne)[ktora], &(*ile)[ktora]);
+  int which = variable - 'a';
+  add_one(&(*variables)[which], &(*sizes)[which]);
   return i;
 }
 
 /**
- * Zmniejsza o jeden wartość zmiennej 'zmienna'.
+ * Decreases the value of variable 'variable' by one.
  */
-void zmniejsz(int **zmienna) {
+void decrease(int **variable) {
   int i = 0;
-  while ((*zmienna)[i] == 0) {
-    (*zmienna)[i] = 9;
+  while ((*variable)[i] == 0) {
+    (*variable)[i] = 9;
     ++i;
   }
-  (*zmienna)[i] = (*zmienna)[i] - 1;
+  (*variable)[i] = (*variable)[i] - 1;
 }
 
 /**
- * Zeruje zmienną 'zmienna'.
+ * Resets variable 'variable' to zero.
  */
-void wyzeruj(int **zmienna, int *size) {
-  *zmienna = realloc (*zmienna, 3 * sizeof(int));
-  (*zmienna)[0] = 0;
-  (*zmienna)[1] = 0;
-  (*zmienna)[2] = 0;
+void reset_to_zero(int **variable, int *size) {
+  *variable = realloc (*variable, 3 * sizeof(int));
+  (*variable)[0] = 0;
+  (*variable)[1] = 0;
+  (*variable)[2] = 0;
   *size = 3;
 }
 
 /**
- * Dodaje wartość z tablicy 'zmienna' do tablicy 'zmienna_zw'.
+ * Adds value from array 'source' to array 'target'.
  *
- * 'ile' to wielkość tablicy 'zmienna'.
+ * 'source_size' is the size of array 'source'.
  *
- * 'ile_zw' to wielkość tablicy 'zmienna_zw'.
+ * 'target_size' is the size of array 'target'.
  */
-void przekaz(int **zmienna, int **zmienna_zw, int *ile, int *ile_zw) {
-  int dodatek = 0;
+void transfer(int **source, int **target, int *source_size, int *target_size) {
+  int carry = 0;
   int i = 0;
-  if (*ile > *ile_zw) {
-    zmien_rozmiar(zmienna_zw, ile_zw, *ile);
+  if (*source_size > *target_size) {
+    resize_array(target, target_size, *source_size);
   }
-  while (i < *ile) {
-    (*zmienna_zw)[i] = (*zmienna_zw)[i] + (*zmienna)[i] + dodatek;
-    if ((*zmienna_zw)[i] >= 10) {
-      (*zmienna_zw)[i] = (*zmienna_zw)[i] - 10;
-      dodatek = 1;
+  while (i < *source_size) {
+    (*target)[i] = (*target)[i] + (*source)[i] + carry;
+    if ((*target)[i] >= 10) {
+      (*target)[i] = (*target)[i] - 10;
+      carry = 1;
     }
     else {
-      dodatek = 0;
+      carry = 0;
     }
     ++i;
   }
-  while (dodatek > 0) {
-    if (i == *ile_zw) {
-      zwieksz_o_jeden(zmienna_zw, ile_zw);
+  while (carry > 0) {
+    if (i == *target_size) {
+      expand_by_one(target, target_size);
     }
-    (*zmienna_zw)[i] = (*zmienna_zw)[i] + 1;
-    if ((*zmienna_zw)[i] >= 10) {
-      (*zmienna_zw)[i] = (*zmienna_zw)[i] - 10;
-      dodatek = 1;
+    (*target)[i] = (*target)[i] + 1;
+    if ((*target)[i] >= 10) {
+      (*target)[i] = (*target)[i] - 10;
+      carry = 1;
     }
     else {
-      dodatek = 0;
+      carry = 0;
     }
     ++i;
   }
 }
 
 
-/* operacje na kodzie */
+/* code operations */
 
 /**
- * Sprawdza czy wartość zmiennej jest równa 0.
+ * Checks if variable value is equal to 0.
  */
-bool czy_koniec(int **zmienne, int ile) {
+bool is_end(int **variables, int count) {
   bool signal = false;
   int i = 0;
-  while (i < ile && !signal) {
-    if ((*zmienne)[i] > 0) {
+  while (i < count && !signal) {
+    if ((*variables)[i] > 0) {
       signal = true;
     }
     ++i;
@@ -217,16 +217,16 @@ bool czy_koniec(int **zmienne, int ile) {
 }
 
 /**
- * Szuka końca wyrażenia nawiasowego i przekazuje indeks bezpośrednio za nim.
+ * Finds the end of parenthetical expression and returns index directly after it.
  */
-int koniec_w_nawiasowego(char **polecenie, int i) {
-  int liczba_naw = 1;
-  while (liczba_naw > 0) {
-    if ((*polecenie)[i] == ')') {
-      --liczba_naw;
+int find_parenthesis_end(char **command, int i) {
+  int paren_count = 1;
+  while (paren_count > 0) {
+    if ((*command)[i] == ')') {
+      --paren_count;
     }
-    else if ((*polecenie)[i] == '(') {
-      ++liczba_naw;
+    else if ((*command)[i] == '(') {
+      ++paren_count;
     }
     ++i;
   }
@@ -234,21 +234,21 @@ int koniec_w_nawiasowego(char **polecenie, int i) {
 }
 
 /**
- * Sprawdza jaki kod wygenerować.
+ * Checks what kind of code to generate.
  *
- * Przekazuje wartość true jeśli ma zostać wygenerowany kod zoptymalizowany.
+ * Returns true if optimized code should be generated.
  *
- * Przekazuje wartość false jeśli ma zostać wygenerowany kod zwykły.
+ * Returns false if regular code should be generated.
  */
-bool jaki_kod(char **polecenie, int indeks) {
+bool which_code(char **command, int index) {
   bool signal = true;
-  int i = indeks;
-  while ((*polecenie)[i] != ')' && signal)  {
-    if ((*polecenie)[i] == '(') {
+  int i = index;
+  while ((*command)[i] != ')' && signal)  {
+    if ((*command)[i] == '(') {
       signal = false;
     }
     ++i;
-    if ((*polecenie)[i] == (*polecenie)[indeks]) {
+    if ((*command)[i] == (*command)[index]) {
       signal = false;
     }
   }
@@ -256,136 +256,136 @@ bool jaki_kod(char **polecenie, int indeks) {
 }
 
 
-/* wykonanie programu pętlik */
+/* looper program execution */
 
 /**
- * Wykonuje kod zoptymalizowany.
+ * Executes optimized code.
  */
-void kod_zoptymalizowany(int ***zmienne, int **ile, char **polecenie, int i) {
-    char pom = (*polecenie)[i];
-    int indeks = pom - 'a';
+void optimized_code(int ***variables, int **sizes, char **command, int i) {
+    char temp = (*command)[i];
+    int index = temp - 'a';
     ++i;
-    while ((*polecenie)[i] != ')') {
-      przekaz(&(*zmienne)[indeks], &(*zmienne)[(*polecenie)[i] - 'a'],
-      &(*ile)[indeks], &(*ile)[(*polecenie)[i] - 'a']);
+    while ((*command)[i] != ')') {
+      transfer(&(*variables)[index], &(*variables)[(*command)[i] - 'a'],
+      &(*sizes)[index], &(*sizes)[(*command)[i] - 'a']);
       ++i;
     }
-    wyzeruj(&(*zmienne)[indeks], &(*ile)[indeks]);
+    reset_to_zero(&(*variables)[index], &(*sizes)[index]);
 
 }
 
 /**
- * Wykonuje instrukcję powtarzaj.
+ * Executes repeat instruction.
  */
-int powtarzaj(int ***zmienne, int **ile, char **polecenie, int i) {
-  int indeks = i;
-  if (jaki_kod(polecenie, indeks)) {
-    kod_zoptymalizowany(zmienne, ile, polecenie, i);
+int repeat(int ***variables, int **sizes, char **command, int i) {
+  int index = i;
+  if (which_code(command, index)) {
+    optimized_code(variables, sizes, command, i);
   }
   else {
-    int koniec;
-    while (czy_koniec(&((*zmienne)[(*polecenie)[i] - 'a']),
-    (*ile)[(*polecenie)[i] - 'a'])) {
-      zmniejsz(&((*zmienne)[(*polecenie)[i] - 'a']));
-      koniec = koniec_w_nawiasowego(polecenie, i + 1);
-      indeks = i + 1;
-      while (indeks < koniec) {
-        if ((*polecenie)[indeks] == '(') {
-          ++indeks;
-          indeks = powtarzaj(zmienne, ile, polecenie, indeks);
+    int end;
+    while (is_end(&((*variables)[(*command)[i] - 'a']),
+    (*sizes)[(*command)[i] - 'a'])) {
+      decrease(&((*variables)[(*command)[i] - 'a']));
+      end = find_parenthesis_end(command, i + 1);
+      index = i + 1;
+      while (index < end) {
+        if ((*command)[index] == '(') {
+          ++index;
+          index = repeat(variables, sizes, command, index);
         }
         else {
-          indeks = dodawanie(zmienne, ile, polecenie, indeks);
+          index = add_operation(variables, sizes, command, index);
         }
       }
     }
   }
-  i = koniec_w_nawiasowego(polecenie, i + 1) + 1;
+  i = find_parenthesis_end(command, i + 1) + 1;
   return i;
 }
 
 /**
- * Wypisuje zmienną po wczytaniu '='.
+ * Prints variable after reading '='.
  */
-void wypisz(int tab[], int size) {
+void print_variable(int arr[], int size) {
    int i = size - 1;
-   while (i >= 0 && tab[i] == 0) --i;
+   while (i >= 0 && arr[i] == 0) --i;
    while (i > 0) {
-     printf("%d", tab[i]);
+     printf("%d", arr[i]);
      --i;
    }
-   printf("%d", tab[0]);
+   printf("%d", arr[0]);
    printf("\n");
 }
 
 /**
- * Czyta polecenie.
+ * Reads command.
  */
-void czytaj(char **tab, int *r_tab) {
+void read_command(char **arr, int *arr_size) {
   int i = 0;
   int c = getchar();
   while (c != '\n') {
-    if (i == *r_tab) {
-      zwieksz(tab, r_tab);
+    if (i == *arr_size) {
+      expand(arr, arr_size);
     }
-    (*tab)[i] = (char) c;
+    (*arr)[i] = (char) c;
     ++i;
     c = getchar();
   }
-  if (i == *r_tab) {
-    zwieksz(tab, r_tab);
+  if (i == *arr_size) {
+    expand(arr, arr_size);
   }
-  (*tab)[i] = (char) c;
+  (*arr)[i] = (char) c;
 }
 
 /**
- * Realizuje polecenia języka pętlik.
+ * Executes looper language commands.
  */
-void rob(int ***zmienne, int **ile, char **polecenie) {
+void execute_commands(int ***variables, int **sizes, char **command) {
   int i = 0;
-  while ((*polecenie)[i] != '\n') {
-    if ((*polecenie)[i] == '(') {
+  while ((*command)[i] != '\n') {
+    if ((*command)[i] == '(') {
       ++i;
-      i = powtarzaj(zmienne, ile, polecenie, i);
+      i = repeat(variables, sizes, command, i);
     }
     else {
-      i = dodawanie(zmienne, ile, polecenie, i);
+      i = add_operation(variables, sizes, command, i);
     }
   }
 }
 
 /**
- * Wykonuje program pętlik.
+ * Executes looper program.
  */
-void wykonuj(void) {
-  int r_tab = 3;
-  char *polecenie = (char*) malloc((unsigned int) r_tab * sizeof(char));
-  int **zmienne = stworz_tablice();
-  int *ile = tab_rozmiarow();
+void run_program(void) {
+  int arr_size = 3;
+  char *command = (char*) malloc((unsigned int) arr_size * sizeof(char));
+  int **variables = create_array();
+  int *sizes = create_sizes_array();
   int c = getchar();
   while (c != EOF) {
     if (c == '=') {
       c = getchar();
-      int indeks = c - 'a';
-      int size = ile[indeks];
-      wypisz(zmienne[indeks], size);
+      int index = c - 'a';
+      int size = sizes[index];
+      print_variable(variables[index], size);
       c = getchar();
     }
     else {
       ungetc(c, stdin);
-      czytaj(&polecenie, &r_tab);
-      rob(&zmienne, &ile, &polecenie);
+      read_command(&command, &arr_size);
+      execute_commands(&variables, &sizes, &command);
     }
     c = getchar();
-    r_tab = 3;
-    polecenie = (char*) realloc(polecenie,(unsigned int) r_tab * sizeof(char));
+    arr_size = 3;
+    command = (char*) realloc(command,(unsigned int) arr_size * sizeof(char));
   }
-  free(polecenie);
-  free_tab(zmienne);
-  free(ile);
+  free(command);
+  free_array(variables);
+  free(sizes);
 }
 
 int main(void) {
-  wykonuj();
+  run_program();
   return 0;
 }
