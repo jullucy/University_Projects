@@ -1,4 +1,4 @@
-# 🎓 University Projects
+# University Projects
 
 This repository contains a collection of projects and assignments from my Computer Science studies at the **University of Warsaw (MIMUW)**. Each project demonstrates different programming concepts, algorithms, and technologies learned throughout the curriculum.
 
@@ -36,7 +36,7 @@ Classic programming exercises covering fundamental concepts:
 - **Reversi game (`reversi.c`)**
   - Console-based implementation of the classic board game
 
-### ☕ Object-Oriented Programming (Java)
+### Object-Oriented Programming (Java)
 
 #### Public Transport Simulation
 Event-driven simulation of urban public transportation system:
