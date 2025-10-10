@@ -22,7 +22,7 @@
  * nand_output - enables to iterate over the gates connected to the output of
  * the given gate.
  *
- * author: Julia £ucyn
+ * author: Julia Łucyn
  * date: 20.04.2024
  */
 
